@@ -28,6 +28,7 @@ list(APPEND Raster_Sources
 qt_add_executable(Raster ${Raster_Sources})
 
 target_link_libraries(Raster PRIVATE Qt6::Widgets)
+target_link_libraries(Raster PRIVATE qtadvanceddocking-qt6)
 
 set_target_properties(Raster PROPERTIES
     WIN32_EXECUTABLE ON

@@ -16,20 +16,13 @@
    along with Raster.  If not, see <http://www.gnu.org/licenses/>.
 ]]
 
-cmake_minimum_required(VERSION 3.18 FATAL_ERROR)
+set(ADS_VERSION "4.4.1")
+set(BUILD_STATIC ON)
+set(BUILD_EXAMPLES OFF)
 
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
+FetchContent_Declare(
+    QtADS
+    GIT_REPOSITORY https://github.com/raster-editor/Qt-Advanced-Docking-System.git
+)
 
-set(RASTER_VERSION_MAJOR "0")
-set(RASTER_VERSION_MINOR "1")
-set(RASTER_VERSION_PATCH "0")
-
-set(RASTER_VERSION "${RASTER_VERSION_MAJOR}.${RASTER_VERSION_MINOR}.${RASTER_VERSION_PATCH}")
-
-project(Raster VERSION ${RASTER_VERSION} LANGUAGES C CXX)
-
-include(FetchContent)
-
-add_subdirectory(ext)
-add_subdirectory(src)
+FetchContent_MakeAvailable(QtADS)
