@@ -16,9 +16,15 @@
    along with Raster.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include <iostream>
+#include <QApplication>
+
+#include "mainwindow.h"
 
 int main(int argc, char** argv) {
-    std::cout << "Hello, Raster!" << std::endl;
-    return 0;
+    QApplication app(argc, argv);
+
+    Raster::MainWindow mainWindow;
+    mainWindow.show();
+
+    return app.exec();
 }

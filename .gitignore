@@ -53,4 +53,11 @@ CTestTestfile.cmake
 _deps
 CMakeUserPresets.json
 
+# CMake build folder
 build
+
+# VSCode configs and stuff
+.vscode
+
+# clangd cache
+.cache

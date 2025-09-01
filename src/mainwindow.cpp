@@ -1,4 +1,4 @@
-#[[
+/*
    Copyright (C) 2025 Letik Kirill
 
    This file is part of Raster.
@@ -14,22 +14,15 @@
 
    You should have received a copy of the GNU General Public License
    along with Raster.  If not, see <http://www.gnu.org/licenses/>.
-]]
+*/
 
-find_package(Qt6 REQUIRED COMPONENTS Widgets)
-qt_standard_project_setup()
+#include "mainwindow.h"
+#include <qnamespace.h>
 
-list(APPEND Raster_Sources 
-   main.cpp
-   mainwindow.cpp
-   mainwindow.h
-)
-
-qt_add_executable(Raster ${Raster_Sources})
-
-target_link_libraries(Raster PRIVATE Qt6::Widgets)
-
-set_target_properties(Raster PROPERTIES
-    WIN32_EXECUTABLE ON
-    MACOSX_BUNDLE ON
-)
+namespace Raster {
+   MainWindow::MainWindow() : QMainWindow() {
+      this->m_label = new QLabel(tr("Hello, Qt!"), this);
+      m_label->setAlignment(Qt::AlignCenter);
+      setCentralWidget(m_label);
+   }
+}
