@@ -25,7 +25,10 @@ list(APPEND Raster_Sources
    mainwindow.h
 )
 
-qt_add_executable(Raster ${Raster_Sources})
+qt_add_resources(Raster_Resources
+   styles.qrc
+)
+qt_add_executable(Raster ${Raster_Sources} ${Raster_Resources})
 
 target_link_libraries(Raster PRIVATE Qt6::Widgets)
 target_link_libraries(Raster PRIVATE qtadvanceddocking-qt6)

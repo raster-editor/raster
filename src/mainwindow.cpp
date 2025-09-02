@@ -16,24 +16,46 @@
    along with Raster.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "mainwindow.h"
-#include "DockManager.h"
+#include <QApplication>
+#include <QResource>
+#include <QFile>
+#include <QPalette>
+#include <QMessageBox>
+
 #include "ads_globals.h"
-#include <qnamespace.h>
+#include "DockManager.h"
+#include "DockWidget.h"
+
+#include "mainwindow.h"
+
+static void initStyles() {
+   Q_INIT_RESOURCE(styles);
+}
 
 namespace Raster {
    MainWindow::MainWindow() : QMainWindow() {
+      initStyles();
+      ads::CDockManager::setConfigFlag(ads::CDockManager::FocusHighlighting, true);
       this->m_dock = new ads::CDockManager(this);
 
-      ads::CDockWidget* CentralDockWidget = m_dock->createDockWidget("CentralWidget");
-      CentralDockWidget->setWidget(new QWidget(this));
-      CentralDockWidget->setFeature(ads::CDockWidget::NoTab, true);
-      auto* CentralDockArea = m_dock->setCentralWidget(CentralDockWidget);
+      QFile f(":/styles/docking.css");
+      if (!f.exists()) {
+         qWarning() << "docking.css does not exist";
+      }
+      if (!f.open(QFile::ReadOnly | QFile::Text)) {
+         qWarning() << "failed to open docking.css";
+      }
+      const QString style = QString::fromUtf8(f.readAll());
+      m_dock->setStyleSheet(style);
+      f.close();
+
+      QPalette palette = QApplication::palette();
+      palette.setColor(QPalette::Window, QColor(29, 29, 29));
+      QApplication::setPalette(palette);
 
       QLabel* w = new QLabel("Widget!!");
       auto dockWidget = m_dock->createDockWidget("WWW");
       dockWidget->setWidget(w);
       m_dock->addDockWidget(ads::BottomDockWidgetArea, dockWidget);
-
    }
 }

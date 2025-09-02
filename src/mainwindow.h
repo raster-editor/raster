@@ -16,12 +16,12 @@
    along with Raster.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#pragma once
+
 #include <QMainWindow>
 #include <QLabel>
 
 #include "DockManager.h"
-#include "DockAreaWidget.h"
-#include "DockWidget.h"
 
 namespace Raster {
    class MainWindow : public QMainWindow {
