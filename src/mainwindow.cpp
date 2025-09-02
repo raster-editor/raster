@@ -17,12 +17,23 @@
 */
 
 #include "mainwindow.h"
+#include "DockManager.h"
+#include "ads_globals.h"
 #include <qnamespace.h>
 
 namespace Raster {
    MainWindow::MainWindow() : QMainWindow() {
-      this->m_label = new QLabel(tr("Hello, Qt!"), this);
-      m_label->setAlignment(Qt::AlignCenter);
-      setCentralWidget(m_label);
+      this->m_dock = new ads::CDockManager(this);
+
+      ads::CDockWidget* CentralDockWidget = m_dock->createDockWidget("CentralWidget");
+      CentralDockWidget->setWidget(new QWidget(this));
+      CentralDockWidget->setFeature(ads::CDockWidget::NoTab, true);
+      auto* CentralDockArea = m_dock->setCentralWidget(CentralDockWidget);
+
+      QLabel* w = new QLabel("Widget!!");
+      auto dockWidget = m_dock->createDockWidget("WWW");
+      dockWidget->setWidget(w);
+      m_dock->addDockWidget(ads::BottomDockWidgetArea, dockWidget);
+
    }
 }

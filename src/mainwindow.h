@@ -19,6 +19,10 @@
 #include <QMainWindow>
 #include <QLabel>
 
+#include "DockManager.h"
+#include "DockAreaWidget.h"
+#include "DockWidget.h"
+
 namespace Raster {
    class MainWindow : public QMainWindow {
    public:
@@ -26,5 +30,7 @@ namespace Raster {
    
    private:
       QLabel* m_label;
+
+      ads::CDockManager* m_dock;
    };
 }
