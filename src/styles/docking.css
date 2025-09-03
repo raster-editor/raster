@@ -20,10 +20,8 @@ ads--CDockContainerWidget > QSplitter {
 
 
 ads--CDockSplitter::handle {
-	background-color: palette(dark);
-	/* uncomment the following line if you would like to change the size of
-       the splitter handles */
-	/* height: 1px; */
+	background-color: palette(shadow);
+	height: 4px;
 }
 
 
@@ -32,17 +30,18 @@ ads--CDockSplitter::handle {
  *****************************************************************************/
 ads--CDockAreaWidget {
 	background: palette(window);
+	border: 1px solid;
+	border-color: transparent;
+}
+
+ads--CDockAreaWidget[focused="true"] {
+	border-color: palette(highlight);
 }
 
 
 ads--CDockAreaTitleBar {
 	background: transparent;
-	border-bottom: 2px solid palette(light);
 	padding-bottom: 0px;
-}
-
-ads--CDockAreaWidget[focused="true"] ads--CDockAreaTitleBar {
-	border-bottom: 2px solid palette(highlight);
 }
 
 ads--CTitleBarButton {
@@ -74,10 +73,7 @@ ads--CTitleBarButton {
  *****************************************************************************/
 ads--CDockWidgetTab {
 	background: palette(window);
-	border-color: palette(light);
-	border-style: solid;
-	border-width: 0 1px 0 0;
-	padding: 0 0px;
+	padding: 0 10px;
 	qproperty-iconSize: 16px 16px;/* this is optional in case you would like to change icon size*/
 }
 
@@ -87,12 +83,12 @@ ads--CDockWidgetTab[activeTab="true"] {
 
 ads--CDockWidgetTab QLabel {
 	color: palette(dark);
+	font-weight: 600;
 }
 
-ads--CDockWidgetTab[activeTab="true"] QLabel {
-	color: palette(foreground);
+ads--CDockWidgetTab[focused="true"] QLabel {
+	color: palette(light);
 }
-
 
 #tabCloseButton {
 	margin-top: 2px;
@@ -114,9 +110,7 @@ ads--CDockWidgetTab[activeTab="true"] QLabel {
 }
 
 /* Focus related styling */
-ads--CDockWidgetTab[focused="true"] {
-	border-color: palette(highlight);
-}
+
 
 ads--CDockWidgetTab[focused="true"] > #tabCloseButton {
 	qproperty-icon: url(:/ads/images/close-button-focused.svg)
@@ -135,17 +129,9 @@ ads--CDockWidgetTab[focused="true"] QLabel {
 }
 
 
-
 /*****************************************************************************
  * CDockWidget
  *****************************************************************************/
-ads--CDockWidget {
-	background: palette(light);
-	border-color: palette(light);
-	border-style: solid;
-	border-width: 1px 0 0 0;
-}
-
 
 QScrollArea#dockWidgetScrollArea {
 	padding: 0px;

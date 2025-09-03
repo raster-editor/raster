@@ -35,7 +35,17 @@ static void initStyles() {
 namespace Raster {
    MainWindow::MainWindow() : QMainWindow() {
       initStyles();
+      ads::CDockManager::setConfigFlags(ads::CDockManager::DefaultOpaqueConfig);
+      ads::CDockManager::setConfigFlag(ads::CDockManager::RetainTabSizeWhenCloseButtonHidden, true);
+      ads::CDockManager::setConfigFlag(ads::CDockManager::AlwaysShowTabs, true);
+      ads::CDockManager::setConfigFlag(ads::CDockManager::AllTabsHaveCloseButton, false);
+      ads::CDockManager::setConfigFlag(ads::CDockManager::DockAreaHasTabsMenuButton, false);
+      ads::CDockManager::setConfigFlag(ads::CDockManager::DockAreaHasCloseButton, false);
+      ads::CDockManager::setConfigFlag(ads::CDockManager::DockAreaHasUndockButton, false);
+      ads::CDockManager::setConfigFlag(ads::CDockManager::DockAreaHideDisabledButtons, true);
+      ads::CDockManager::setConfigFlag(ads::CDockManager::DoubleClickUndocksWidget, false);
       ads::CDockManager::setConfigFlag(ads::CDockManager::FocusHighlighting, true);
+      ads::CDockManager::setConfigFlag(ads::CDockManager::OpaqueSplitterResize, true);
       this->m_dock = new ads::CDockManager(this);
 
       QFile f(":/styles/docking.css");
@@ -46,16 +56,30 @@ namespace Raster {
          qWarning() << "failed to open docking.css";
       }
       const QString style = QString::fromUtf8(f.readAll());
+      m_dock->setStyleSheet("");
       m_dock->setStyleSheet(style);
       f.close();
 
       QPalette palette = QApplication::palette();
       palette.setColor(QPalette::Window, QColor(29, 29, 29));
+      palette.setColor(QPalette::Dark, QColor(172, 172, 172));
+      palette.setColor(QPalette::WindowText, QColor(208, 208, 208));
+      palette.setColor(QPalette::Text, QColor(208, 208, 208));
+      palette.setColor(QPalette::Highlight, QColor(64, 148, 238));
+      palette.setColor(QPalette::Light, QColor(208, 208, 208));
+      palette.setColor(QPalette::Shadow, QColor(0, 0, 0));
       QApplication::setPalette(palette);
 
-      QLabel* w = new QLabel("Widget!!");
-      auto dockWidget = m_dock->createDockWidget("WWW");
-      dockWidget->setWidget(w);
+      auto dockWidget = m_dock->createDockWidget("highfashion");
+      dockWidget->setWidget( new QLabel("Widget!!"));
       m_dock->addDockWidget(ads::BottomDockWidgetArea, dockWidget);
+
+      auto dockWidget1 = m_dock->createDockWidget("aquamarine");
+      dockWidget1->setWidget( new QLabel("Widget!!"));
+      m_dock->addDockWidget(ads::LeftDockWidgetArea, dockWidget1);
+
+      auto dockWidget2 = m_dock->createDockWidget("timeslikethese");
+      dockWidget2->setWidget(new QLabel("Widget!!"));
+      m_dock->addDockWidget(ads::RightDockWidgetArea, dockWidget2);
    }
 }
