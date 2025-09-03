@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/styles">
         <file alias="docking.css">styles/docking.css</file>
+        <file alias="ui.css">styles/ui.css</file>
     </qresource>
 </RCC>

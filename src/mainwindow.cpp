@@ -21,6 +21,8 @@
 #include <QFile>
 #include <QPalette>
 #include <QMessageBox>
+#include <qapplication.h>
+#include <qpushbutton.h>
 
 #include "ads_globals.h"
 #include "DockManager.h"
@@ -54,26 +56,46 @@ namespace Raster {
 
       this->m_dock = new ads::CDockManager(this);
 
-      QFile f(":/styles/docking.css");
-      if (!f.exists()) {
-         qWarning() << "docking.css does not exist";
+      /* avoid cluttering current scope */
+      {
+         QFile f(":/styles/docking.css");
+         if (!f.exists()) {
+            qWarning() << "docking.css does not exist";
+         }
+         if (!f.open(QFile::ReadOnly | QFile::Text)) {
+            qWarning() << "failed to open docking.css";
+         }
+         const QString style = QString::fromUtf8(f.readAll());
+         m_dock->setStyleSheet("");
+         m_dock->setStyleSheet(style);
+         f.close();
       }
-      if (!f.open(QFile::ReadOnly | QFile::Text)) {
-         qWarning() << "failed to open docking.css";
+
+      {
+         QFile f(":/styles/ui.css");
+         if (!f.exists()) {
+            qWarning() << "ui.css does not exist";
+         }
+         if (!f.open(QFile::ReadOnly | QFile::Text)) {
+            qWarning() << "failed to open ui.css";
+         }
+         const QString style = QString::fromUtf8(f.readAll());
+         setStyleSheet(style);
+         f.close();
       }
-      const QString style = QString::fromUtf8(f.readAll());
-      m_dock->setStyleSheet("");
-      m_dock->setStyleSheet(style);
-      f.close();
 
       QPalette palette = QApplication::palette();
       palette.setColor(QPalette::Window, QColor(29, 29, 29));
-      palette.setColor(QPalette::Dark, QColor(172, 172, 172));
       palette.setColor(QPalette::WindowText, QColor(208, 208, 208));
       palette.setColor(QPalette::Text, QColor(208, 208, 208));
       palette.setColor(QPalette::Highlight, QColor(64, 148, 238));
-      palette.setColor(QPalette::Light, QColor(208, 208, 208));
+      palette.setColor(QPalette::Light, QColor(164, 164, 164));
+      palette.setColor(QPalette::Midlight, QColor(128, 128, 128));
+      palette.setColor(QPalette::Dark, QColor(75, 75, 75));
+      palette.setColor(QPalette::Mid, QColor(48, 48, 48));
       palette.setColor(QPalette::Shadow, QColor(0, 0, 0));
+      palette.setColor(QPalette::Button, QColor(0, 0, 0));
+      palette.setColor(QPalette::ButtonText, QColor(186, 186, 186));
       QApplication::setPalette(palette);
 
       auto dockWidget = m_dock->createDockWidget("highfashion");
@@ -81,7 +103,7 @@ namespace Raster {
       m_dock->addDockWidget(ads::BottomDockWidgetArea, dockWidget);
 
       auto dockWidget1 = m_dock->createDockWidget("aquamarine");
-      dockWidget1->setWidget( new QLabel("Widget!!"));
+      dockWidget1->setWidget( new QPushButton("Testing Push Buttons"));
       m_dock->addDockWidget(ads::LeftDockWidgetArea, dockWidget1);
 
       auto dockWidget2 = m_dock->createDockWidget("timeslikethese");

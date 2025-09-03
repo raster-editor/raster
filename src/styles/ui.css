@@ -1,0 +1,15 @@
+QPushButton {
+    background: palette(button);
+    color: palette(button-text);
+    border: 1px solid palette(mid);
+    border-radius: 4px;
+}
+
+QPushButton:hover {
+    color: palette(light);
+    border-color: palette(dark);
+}
+
+QPushButton:pressed {
+    border-color: palette(midlight);
+}

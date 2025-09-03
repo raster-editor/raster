@@ -82,12 +82,12 @@ ads--CDockWidgetTab[activeTab="true"] {
 }
 
 ads--CDockWidgetTab QLabel {
-	color: palette(dark);
+	color: palette(light);
 	font-weight: 600;
 }
 
 ads--CDockWidgetTab[focused="true"] QLabel {
-	color: palette(light);
+	color: palette(text);
 }
 
 #tabCloseButton {
@@ -119,10 +119,6 @@ ads--CDockWidgetTab[focused="true"] > #tabCloseButton:hover {
 
 ads--CDockWidgetTab[focused="true"] > #tabCloseButton:pressed {
 	background: rgba(255, 255, 255, 92);
-}
-
-ads--CDockWidgetTab[focused="true"] QLabel {
-	color: palette(light);
 }
 
 
