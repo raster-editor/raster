@@ -25,16 +25,18 @@
 #include "ads_globals.h"
 #include "DockManager.h"
 #include "DockWidget.h"
+#include "IconProvider.h"
 
 #include "mainwindow.h"
 
-static void initStyles() {
+static void initResources() {
    Q_INIT_RESOURCE(styles);
+   Q_INIT_RESOURCE(icons);
 }
 
 namespace Raster {
    MainWindow::MainWindow() : QMainWindow() {
-      initStyles();
+      initResources();
       ads::CDockManager::setConfigFlags(ads::CDockManager::DefaultOpaqueConfig);
       ads::CDockManager::setConfigFlag(ads::CDockManager::RetainTabSizeWhenCloseButtonHidden, true);
       ads::CDockManager::setConfigFlag(ads::CDockManager::AlwaysShowTabs, true);
@@ -46,6 +48,10 @@ namespace Raster {
       ads::CDockManager::setConfigFlag(ads::CDockManager::DoubleClickUndocksWidget, false);
       ads::CDockManager::setConfigFlag(ads::CDockManager::FocusHighlighting, true);
       ads::CDockManager::setConfigFlag(ads::CDockManager::OpaqueSplitterResize, true);
+
+      auto iconProvider = ads::CDockManager::iconProvider();
+      iconProvider.registerCustomIcon(ads::TabCloseIcon, QIcon(":/icons/xmark.svg"));
+
       this->m_dock = new ads::CDockManager(this);
 
       QFile f(":/styles/docking.css");

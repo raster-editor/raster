@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/icons">
+        <file alias="xmark.svg">icons/xmark.svg</file>
+    </qresource>
+</RCC>

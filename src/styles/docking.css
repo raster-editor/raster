@@ -97,7 +97,7 @@ ads--CDockWidgetTab[focused="true"] QLabel {
 	padding: 0px -2px;
 	qproperty-icon: url(:/ads/images/close-button.svg),
 		url(:/ads/images/close-button-disabled.svg) disabled;
-	qproperty-iconSize: 16px;
+	qproperty-iconSize: 12px;
 }
 
 #tabCloseButton:hover {
@@ -108,9 +108,6 @@ ads--CDockWidgetTab[focused="true"] QLabel {
 #tabCloseButton:pressed {
 	background: rgba(0, 0, 0, 48);
 }
-
-/* Focus related styling */
-
 
 ads--CDockWidgetTab[focused="true"] > #tabCloseButton {
 	qproperty-icon: url(:/ads/images/close-button-focused.svg)

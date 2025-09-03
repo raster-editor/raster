@@ -27,6 +27,7 @@ list(APPEND Raster_Sources
 
 qt_add_resources(Raster_Resources
    styles.qrc
+   icons.qrc
 )
 qt_add_executable(Raster ${Raster_Sources} ${Raster_Resources})
 
