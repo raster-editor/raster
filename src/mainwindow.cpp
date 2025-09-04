@@ -43,16 +43,13 @@ namespace Raster {
       ads::CDockManager::setConfigFlag(ads::CDockManager::RetainTabSizeWhenCloseButtonHidden, true);
       ads::CDockManager::setConfigFlag(ads::CDockManager::AlwaysShowTabs, true);
       ads::CDockManager::setConfigFlag(ads::CDockManager::AllTabsHaveCloseButton, false);
-      ads::CDockManager::setConfigFlag(ads::CDockManager::DockAreaHasTabsMenuButton, false);
+      ads::CDockManager::setConfigFlag(ads::CDockManager::DockAreaHasTabsMenuButton, true);
       ads::CDockManager::setConfigFlag(ads::CDockManager::DockAreaHasCloseButton, false);
       ads::CDockManager::setConfigFlag(ads::CDockManager::DockAreaHasUndockButton, false);
       ads::CDockManager::setConfigFlag(ads::CDockManager::DockAreaHideDisabledButtons, true);
       ads::CDockManager::setConfigFlag(ads::CDockManager::DoubleClickUndocksWidget, false);
       ads::CDockManager::setConfigFlag(ads::CDockManager::FocusHighlighting, true);
       ads::CDockManager::setConfigFlag(ads::CDockManager::OpaqueSplitterResize, true);
-
-      auto iconProvider = ads::CDockManager::iconProvider();
-      iconProvider.registerCustomIcon(ads::TabCloseIcon, QIcon(":/icons/xmark.svg"));
 
       this->m_dock = new ads::CDockManager(this);
 
@@ -88,6 +85,7 @@ namespace Raster {
       palette.setColor(QPalette::Window, QColor(29, 29, 29));
       palette.setColor(QPalette::WindowText, QColor(208, 208, 208));
       palette.setColor(QPalette::Text, QColor(208, 208, 208));
+      palette.setColor(QPalette::BrightText, QColor(255, 255, 255));
       palette.setColor(QPalette::Highlight, QColor(64, 148, 238));
       palette.setColor(QPalette::Light, QColor(164, 164, 164));
       palette.setColor(QPalette::Midlight, QColor(128, 128, 128));

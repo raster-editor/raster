@@ -6,10 +6,34 @@ QPushButton {
 }
 
 QPushButton:hover {
-    color: palette(light);
+    color: palette(text);
     border-color: palette(dark);
 }
 
 QPushButton:pressed {
     border-color: palette(midlight);
+}
+
+QMenu {
+	background-color: palette(window);
+	border: 1px solid palette(mid);
+	border-radius: 4px;
+}
+
+QMenu::separator {
+	background-color: palette(dark);
+	height: 2px;
+	margin: 2px 8px;
+}
+
+QMenu::item {
+    color: palette(bright-text);
+}
+
+QMenu::item:selected {
+    background-color: palette(dark);
+}
+
+QMenu::item:pressed {
+    background-color: palette(midlight);
 }

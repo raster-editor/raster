@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/icons">
         <file alias="xmark.svg">icons/xmark.svg</file>
+        <file alias="menu.svg">icons/menu.svg</file>
     </qresource>
 </RCC>
