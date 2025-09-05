@@ -23,7 +23,7 @@ QMenu {
 QMenu::separator {
 	background-color: palette(dark);
 	height: 2px;
-	margin: 2px 8px;
+	margin: 3px 8px;
 }
 
 QMenu::item {

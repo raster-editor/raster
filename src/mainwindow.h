@@ -27,10 +27,17 @@ namespace Raster {
    class MainWindow : public QMainWindow {
    public:
       MainWindow();
+
+      void createActions();
+      void createMenus();
+
+      void exit();
    
    private:
       QLabel* m_label;
 
       ads::CDockManager* m_dock;
+
+      QAction* m_exitAction;
    };
 }

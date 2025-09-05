@@ -21,13 +21,12 @@
 #include <QFile>
 #include <QPalette>
 #include <QMessageBox>
-#include <qapplication.h>
-#include <qpushbutton.h>
+#include <QAction>
+#include <QMenuBar>
 
 #include "ads_globals.h"
 #include "DockManager.h"
 #include "DockWidget.h"
-#include "IconProvider.h"
 
 #include "mainwindow.h"
 
@@ -95,6 +94,10 @@ namespace Raster {
       palette.setColor(QPalette::Button, QColor(0, 0, 0));
       palette.setColor(QPalette::ButtonText, QColor(186, 186, 186));
       QApplication::setPalette(palette);
+      QApplication::setStyle("fusion");
+
+      createActions();
+      createMenus();
 
       auto dockWidget = m_dock->createDockWidget("highfashion");
       dockWidget->setWidget( new QLabel("Widget!!"));
@@ -107,5 +110,19 @@ namespace Raster {
       auto dockWidget2 = m_dock->createDockWidget("timeslikethese");
       dockWidget2->setWidget(new QLabel("Widget!!"));
       m_dock->addDockWidget(ads::RightDockWidgetArea, dockWidget2);
+   }
+
+   void MainWindow::createActions() {
+      m_exitAction = new QAction(tr("Exit"), this);
+      connect(m_exitAction, SIGNAL(QAction::triggered), this, SLOT(exit));
+   }
+
+   void MainWindow::createMenus() {
+      auto file = menuBar()->addMenu(tr("File"));
+      file->addAction(m_exitAction);
+   }
+
+   void MainWindow::exit() {
+      QApplication::quit();
    }
 }
