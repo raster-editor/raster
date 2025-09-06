@@ -14,6 +14,47 @@ QPushButton:pressed {
     border-color: palette(midlight);
 }
 
+QPushButton[role="dialog"] {
+    background-color: none;
+    color: palette(button-text);
+    font-weight: 800;
+    height: 20px;
+    border: 2px solid palette(dark);
+    border-radius: 12px;
+}
+
+QPushButton[role="dialog"]:hover {
+    background-color: palette(mid);
+    color: palette(text);
+    border-color: palette(midlight);
+}
+
+QPushButton[role="dialog"]:pressed {
+    background-color: palette(dark);
+    color: palette(text);
+    border-color: palette(light);
+}
+
+QPushButton[role="dialog"]:default {
+    background-color: palette(highlight);
+    color: palette(bright-text);
+    font-weight: 800;
+    height: 24px;
+    border: none;
+}
+
+QPushButton[role="dialog"]:default:hover {
+    background-color: rgba(58, 133, 214, 255);
+}
+
+QPushButton[role="dialog"]:default:pressed {
+    background-color: rgba(52, 120, 193, 255);
+}
+
+QPushButton[role="dialog"]:focus {
+    border-color: palette(highlight);
+}
+
 QMenu {
 	background-color: palette(window);
 	border: 1px solid palette(mid);
@@ -36,4 +77,9 @@ QMenu::item:selected {
 
 QMenu::item:pressed {
     background-color: palette(midlight);
+}
+
+QMenuBar {
+    border: none;
+    color: palette(text);
 }

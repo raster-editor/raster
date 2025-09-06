@@ -28,6 +28,7 @@ namespace Raster {
    public:
       MainWindow();
 
+      void applyStyleSheets();
       void createActions();
       void createMenus();
 

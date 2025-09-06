@@ -23,6 +23,7 @@
 #include <QMessageBox>
 #include <QAction>
 #include <QMenuBar>
+#include <qboxlayout.h>
 
 #include "ads_globals.h"
 #include "DockManager.h"
@@ -52,33 +53,7 @@ namespace Raster {
 
       this->m_dock = new ads::CDockManager(this);
 
-      /* avoid cluttering current scope */
-      {
-         QFile f(":/styles/docking.css");
-         if (!f.exists()) {
-            qWarning() << "docking.css does not exist";
-         }
-         if (!f.open(QFile::ReadOnly | QFile::Text)) {
-            qWarning() << "failed to open docking.css";
-         }
-         const QString style = QString::fromUtf8(f.readAll());
-         m_dock->setStyleSheet("");
-         m_dock->setStyleSheet(style);
-         f.close();
-      }
-
-      {
-         QFile f(":/styles/ui.css");
-         if (!f.exists()) {
-            qWarning() << "ui.css does not exist";
-         }
-         if (!f.open(QFile::ReadOnly | QFile::Text)) {
-            qWarning() << "failed to open ui.css";
-         }
-         const QString style = QString::fromUtf8(f.readAll());
-         setStyleSheet(style);
-         f.close();
-      }
+      applyStyleSheets();
 
       QPalette palette = QApplication::palette();
       palette.setColor(QPalette::Window, QColor(29, 29, 29));
@@ -100,16 +75,54 @@ namespace Raster {
       createMenus();
 
       auto dockWidget = m_dock->createDockWidget("highfashion");
-      dockWidget->setWidget( new QLabel("Widget!!"));
+      auto defaultDialogButton = new QPushButton("OK");
+      defaultDialogButton->setAutoDefault(true);
+      defaultDialogButton->setDefault(true);
+      defaultDialogButton->setProperty("role", "dialog");
+      dockWidget->setWidget(defaultDialogButton);
+      dockWidget->setContentsMargins(25, 25, 25, 25);
       m_dock->addDockWidget(ads::BottomDockWidgetArea, dockWidget);
 
       auto dockWidget1 = m_dock->createDockWidget("aquamarine");
       dockWidget1->setWidget( new QPushButton("Testing Push Buttons"));
+      dockWidget1->setContentsMargins(25, 25, 25, 25);
       m_dock->addDockWidget(ads::LeftDockWidgetArea, dockWidget1);
 
       auto dockWidget2 = m_dock->createDockWidget("timeslikethese");
-      dockWidget2->setWidget(new QLabel("Widget!!"));
+      auto ordinaryDialogButton = new QPushButton("Cancel");
+      ordinaryDialogButton->setProperty("role", "dialog");
+      auto layout = new QHBoxLayout();
+      layout->addWidget(ordinaryDialogButton);
+      auto holder = new QWidget();
+      holder->setLayout(layout);
+      dockWidget2->setWidget(holder);
+      dockWidget2->setContentsMargins(25, 25, 25, 25);
       m_dock->addDockWidget(ads::RightDockWidgetArea, dockWidget2);
+   }
+
+   void MainWindow::applyStyleSheets() {
+      QFile dockingFile(":/styles/docking.css");
+      if (!dockingFile.exists()) {
+         qWarning() << "docking.css does not exist";
+      }
+      if (!dockingFile.open(QFile::ReadOnly | QFile::Text)) {
+         qWarning() << "failed to open docking.css";
+      }
+      const QString dockingStyle = QString::fromUtf8(dockingFile.readAll());
+      m_dock->setStyleSheet("");
+      m_dock->setStyleSheet(dockingStyle);
+      dockingFile.close();
+
+      QFile appStyle(":/styles/ui.css");
+      if (!appStyle.exists()) {
+         qWarning() << "ui.css does not exist";
+      }
+      if (!appStyle.open(QFile::ReadOnly | QFile::Text)) {
+         qWarning() << "failed to open ui.css";
+      }
+      const QString style = QString::fromUtf8(appStyle.readAll());
+      setStyleSheet(style);
+      appStyle.close();
    }
 
    void MainWindow::createActions() {
